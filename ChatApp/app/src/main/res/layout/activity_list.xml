@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.example.tufel.chatapp.ListActivity">
+
+
+        <ListView
+            android:id="@+id/userlist"
+            android:layout_width="140dp"
+            android:layout_height="match_parent" />
+        <ListView
+            android:id="@+id/messagelist"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/userlist"
+            android:layout_height="550dp" />
+
+    <EditText
+        android:id="@+id/sendmessagetext"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/messagelist"
+        android:layout_toRightOf="@+id/userlist"
+        android:ems="10"
+        android:gravity="bottom"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/messagelist"
+        android:layout_toRightOf="@+id/sendmessagetext"
+        android:text="Send" />
+</RelativeLayout>
