@@ -48,6 +48,30 @@ public class ListActivity extends AppCompatActivity {
     int pos = 0;
     Gson gson;
     ChatService chatService;
+
+    Handler h = new Handler();
+    int delay = 4*1000; //1 second=1000 milisecond, 5*1000=5seconds
+    Runnable runnable;
+    @Override
+    protected void onResume() {
+        //start handler as activity become visible
+        h.postDelayed( runnable = new Runnable() {
+            public void run() {
+                Toast.makeText(context,"Every 4 Seconds",Toast.LENGTH_SHORT).show();
+                if(userid==-1){}
+                else{
+                    showMessages();
+                }
+                h.postDelayed(runnable, delay);
+            }
+        }, delay);
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        h.removeCallbacks(runnable); //stop handler when activity not visible
+        super.onPause();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,8 +210,14 @@ public class ListActivity extends AppCompatActivity {
                 messageList = response.body();
                 String messagesarr[] = new String[messageList.size()];
                 for (int i = 0; i < messageList.size(); i++) {
-                    messagesarr[i] = messageList.get(i).getMessage();
+                    if(messageList.get(i).getMessage()==null){
+                        messagesarr[i] = "";
+                    }
+                    else
+                        messagesarr[i] = messageList.get(i).getMessage();
                 }
+                messagesView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+                messagesView.setStackFromBottom(true);
                 messagesView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, messagesarr));
             }
             @Override
