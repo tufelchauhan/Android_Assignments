@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<user> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "locha", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "No Internet Connectivity. Please Connect to Internet", Toast.LENGTH_SHORT).show();
                 }
             });
         }
